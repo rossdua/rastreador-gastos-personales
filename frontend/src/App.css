@@ -1,0 +1,119 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f7f6;
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+}
+
+.container {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px;
+}
+
+h1, h2 {
+  color: #333;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.expense-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.expense-form input[type="number"],
+.expense-form input[type="text"] {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1em;
+}
+
+.expense-form button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s ease;
+}
+
+.expense-form button:hover {
+  background-color: #218838;
+}
+
+.total-expenses {
+  text-align: center;
+  margin-bottom: 30px;
+  padding: 15px;
+  background-color: #e9f7ef;
+  border-radius: 8px;
+  border: 1px solid #d4edda;
+}
+
+.total-expenses h2 {
+  margin: 0;
+  color: #28a745;
+}
+
+.expense-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.expense-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f9f9f9;
+  border: 1px solid #eee;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.expense-list li span {
+  flex-grow: 1;
+  color: #555;
+  font-size: 1.1em;
+}
+
+.expense-list li small {
+  color: #888;
+  font-size: 0.85em;
+}
+
+.expense-list li button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: background-color 0.3s ease;
+}
+
+.expense-list li button:hover {
+  background-color: #c82333;
+}
+
+.expense-list p {
+  text-align: center;
+  color: #777;
+  font-style: italic;
+  margin-top: 20px;
+}
