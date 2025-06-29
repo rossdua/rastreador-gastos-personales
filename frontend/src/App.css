@@ -1,119 +1,324 @@
+/* Importar una fuente moderna (Poppins es muy versátil y cercana a la del ejemplo) */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* Colores extraídos directamente del diseño de ejemplo (más precisos) */
+  --primary-bg-color: #1a1a1a; /* Fondo principal muy oscuro, casi negro */
+  --card-bg-color: #2b2b2b;   /* Fondo de las tarjetas, un gris oscuro */
+  --text-primary-color: #e0e0e0; /* Texto principal, un blanco-gris suave */
+  --text-secondary-color: #9e9e9e; /* Texto secundario (descripciones, fechas), gris medio */
+  --accent-color: #2196f3;     /* Azul vibrante para botones y resaltados */
+  --border-color: #424242;     /* Borde oscuro para inputs y elementos sutiles */
+  --shadow-color: rgba(0, 0, 0, 0.6); /* Sombra intensa para el modo oscuro */
+  --success-color: #4caf50;    /* Verde para acciones de éxito */
+  --danger-color: #f44336;     /* Rojo para acciones de eliminar */
+  --radius: 12px; /* Radio de borde general, equivalente a 0.75rem */
+
+  /* Colores específicos del elemento del gasto individual (monto) */
+  --expense-amount-color: #e0e0e0; /* Monto en el mismo color que el texto principal */
+}
+
 body {
-  font-family: 'Arial', sans-serif;
-  background-color: #f4f7f6;
+  font-family: 'Poppins', sans-serif;
   margin: 0;
-  padding: 20px;
+  padding: 0;
+  background-color: var(--primary-bg-color); /* Aplica el color de fondo principal */
+  color: var(--text-primary-color); /* Aplica el color de texto principal */
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: flex-start; /* Alinear arriba, el margen del contenedor lo centrará */
   min-height: 100vh;
+  box-sizing: border-box;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden; /* Prevenir scroll horizontal */
 }
 
+/* Contenedor principal de la aplicación - similar a una tarjeta */
 .container {
-  background-color: #ffffff;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  width: 100%;
+  background-color: var(--card-bg-color); /* Fondo de la tarjeta */
+  padding: 50px 40px; /* Relleno interior */
+  border-radius: var(--radius); /* Bordes redondeados */
+  box-shadow: 0 15px 30px var(--shadow-color); /* Sombra intensa */
   max-width: 600px;
-}
-
-h1, h2 {
-  color: #333;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 40px auto; /* Centrar con margen superior/inferior */
   text-align: center;
-  margin-bottom: 25px;
+  position: relative;
+  z-index: 1;
 }
 
-.expense-form {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 30px;
+/* Estilos para encabezados */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary-color);
+  margin-top: 0;
+  margin-bottom: 1rem;
 }
 
-.expense-form input[type="number"],
-.expense-form input[type="text"] {
-  flex: 1;
-  padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  font-size: 1em;
-}
-
-.expense-form button {
-  background-color: #28a745;
-  color: white;
+/* Estilos de botones generales */
+button {
+  padding: 10px 20px;
   border: none;
-  padding: 12px 20px;
-  border-radius: 5px;
+  border-radius: 8px; /* Ligeramente más redondeados para coincidir */
   cursor: pointer;
-  font-size: 1em;
-  transition: background-color 0.3s ease;
+  font-size: 1rem;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  color: var(--primary-bg-color); /* Texto oscuro sobre botón claro */
+  background-color: var(--accent-color); /* Color azul vibrante */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Sombra sutil para botones */
 }
 
-.expense-form button:hover {
-  background-color: #218838;
+button:hover {
+  background-color: #1a7ae2; /* Un poco más oscuro al pasar el ratón */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5); /* Sombra un poco más fuerte */
 }
 
-.total-expenses {
-  text-align: center;
-  margin-bottom: 30px;
-  padding: 15px;
-  background-color: #e9f7ef;
-  border-radius: 8px;
-  border: 1px solid #d4edda;
+/* Botones con estilo "outline" o secundario */
+button.outline {
+  background-color: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-primary-color);
+  box-shadow: none; /* Sin sombra para botones outline */
 }
 
-.total-expenses h2 {
-  margin: 0;
-  color: #28a745;
+button.outline:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  box-shadow: none;
 }
 
-.expense-list ul {
+/* Estilos para inputs de formulario */
+input[type="text"],
+input[type="number"],
+select {
+  width: calc(100% - 20px); /* Ajuste para padding */
+  padding: 12px 10px;
+  margin-bottom: 15px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px; /* Bordes redondeados */
+  background-color: var(--card-bg-color); /* Fondo del input igual a la tarjeta */
+  color: var(--text-primary-color); /* Color de texto */
+  font-size: 1rem;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus {
+  outline: none;
+  border-color: var(--accent-color); /* Borde azul al enfocar */
+  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.5); /* Sombra de enfoque */
+}
+
+/* Placeholders de inputs */
+input::placeholder {
+  color: var(--text-secondary-color);
+  opacity: 0.8;
+}
+
+/* Estilos para la lista de gastos */
+.expense-list {
   list-style: none;
   padding: 0;
+  margin-top: 20px;
 }
 
-.expense-list li {
+.expense-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #f9f9f9;
-  border: 1px solid #eee;
-  padding: 15px;
+  background-color: var(--card-bg-color); /* Fondo igual a la tarjeta principal */
+  padding: 15px 20px;
   margin-bottom: 10px;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0 5px 15px var(--shadow-color); /* Sombra para cada item */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid var(--border-color); /* Borde sutil */
 }
 
-.expense-list li span {
-  flex-grow: 1;
-  color: #555;
-  font-size: 1.1em;
+.expense-item:hover {
+  transform: translateY(-2px); /* Efecto ligero de elevación */
+  box-shadow: 0 8px 20px var(--shadow-color); /* Sombra más pronunciada al pasar el ratón */
 }
 
-.expense-list li small {
-  color: #888;
-  font-size: 0.85em;
+.expense-item-info {
+  text-align: left;
+  flex-grow: 1; /* Permite que la información ocupe el espacio disponible */
 }
 
-.expense-list li button {
-  background-color: #dc3545;
-  color: white;
+.expense-item-description {
+  font-weight: 500;
+  color: var(--text-primary-color);
+  margin-bottom: 5px;
+}
+
+.expense-item-date {
+  font-size: 0.85rem;
+  color: var(--text-secondary-color);
+}
+
+.expense-item-amount {
+  font-weight: 600;
+  color: var(--expense-amount-color); /* Color del monto */
+  margin-left: 20px;
+  white-space: nowrap; /* Evita que el monto se divida en varias líneas */
+}
+
+.expense-item-actions {
+  margin-left: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.expense-item-actions button {
+  background: none;
   border: none;
-  padding: 8px 12px;
-  border-radius: 4px;
+  color: var(--text-secondary-color);
   cursor: pointer;
-  font-size: 0.9em;
-  transition: background-color 0.3s ease;
+  padding: 5px;
+  border-radius: 4px;
+  transition: color 0.2s ease, background-color 0.2s ease, opacity 0.2s ease;
+  opacity: 0; /* Oculto por defecto */
 }
 
-.expense-list li button:hover {
-  background-color: #c82333;
+.expense-item:hover .expense-item-actions button {
+  opacity: 1; /* Visible al pasar el ratón por el item */
 }
 
-.expense-list p {
+.expense-item-actions button:hover {
+  color: var(--danger-color); /* Rojo al pasar el ratón sobre el botón de eliminar */
+  background-color: rgba(244, 67, 54, 0.1); /* Fondo sutil rojo */
+}
+
+/* Estilos para la paginación */
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 25px;
+  background-color: var(--card-bg-color); /* Fondo igual a la tarjeta */
+  padding: 15px;
+  border-radius: var(--radius);
+  box-shadow: 0 5px 15px var(--shadow-color); /* Sombra */
+  border: 1px solid var(--border-color);
+}
+
+.pagination-controls button {
+  background-color: var(--secondary-bg-color, transparent); /* Fondo transparente */
+  color: var(--text-primary-color);
+  border: 1px solid var(--border-color);
+  margin: 0 5px;
+  padding: 8px 15px;
+  border-radius: 6px;
+  box-shadow: none; /* Sin sombra extra */
+}
+
+.pagination-controls button:hover:not(:disabled) {
+  background-color: rgba(255, 255, 255, 0.08); /* Ligero hover */
+  box-shadow: none;
+}
+
+.pagination-controls button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination-controls span {
+  color: var(--text-primary-color);
+  margin: 0 10px;
+  font-weight: 500;
+}
+
+/* Mensajes de estado (carga, error, sin gastos) */
+.status-message {
   text-align: center;
-  color: #777;
-  font-style: italic;
+  color: var(--text-secondary-color);
   margin-top: 20px;
+  padding: 15px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius);
+  border: 1px solid var(--border-color);
 }
+
+/* Estilos para el campo de búsqueda */
+.search-input {
+  margin-bottom: 20px;
+}
+
+/* Estilos para el pie de página (Footer.tsx) si usas las variables CSS */
+.footer {
+  margin-top: 40px;
+  border-top: 1px solid var(--border-color);
+  background-color: var(--primary-bg-color); /* Fondo del footer */
+  padding: 30px 0;
+  text-align: center;
+  color: var(--text-secondary-color);
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
+}
+
+.footer-logo {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--accent-color);
+}
+
+.footer-links a {
+  color: var(--text-secondary-color);
+  text-decoration: none;
+  margin: 0 15px;
+  transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: var(--text-primary-color);
+}
+
+.footer-social-icons a {
+  color: var(--text-secondary-color);
+  margin-left: 15px;
+  font-size: 1.2rem;
+  transition: color 0.2s ease;
+}
+
+.footer-social-icons a:hover {
+  color: var(--text-primary-color);
+}
+
+.footer-copyright {
+  width: 100%;
+  margin-top: 20px;
+  font-size: 0.9rem;
+}
+
+/* Estilos para el ThemeToggle (si lo tienes) */
+.theme-toggle-button {
+  background-color: var(--card-bg-color); /* Fondo del botón de toggle */
+  border: 1px solid var(--border-color);
+  color: var(--text-primary-color);
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.theme-toggle-button:hover {
+  background-color: rgba(255, 255, 255, 0.08); /* Ligero hover */
+  border-color: var(--accent-color); /* Borde acentuado al pasar el ratón */
+}
+
+/* Asegúrate de que tu App.tsx o componentes usen estas clases/variables */
+/* Por ejemplo, en tu App.tsx:
+<div className="container">
+  ... tu contenido ...
+</div>
+*/
